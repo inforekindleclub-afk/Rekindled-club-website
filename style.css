@@ -238,9 +238,20 @@ p.lede{font-size:17px;color:var(--forest);opacity:0.78;text-align:center;max-wid
 .founder-copy p{font-size:16px;color:var(--forest);opacity:0.82;margin-bottom:14px;}
 @media (max-width:760px){
   .founder-wrap{grid-template-columns:1fr;}
-  .collage{height:auto;margin:0 auto;max-width:320px;}
-  .collage .ph{position:static;width:100%;height:220px;margin:0 auto 16px;transform:none;}
-  .collage .ph-main{height:260px;}
+  /* Collage becomes a swipeable slider on mobile, same pattern as the Features cards —
+     the absolute-positioned desktop collage doesn't fit narrow screens without overflowing. */
+  .collage{
+    height:300px;position:static;margin:0;max-width:100%;
+    display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;
+    gap:16px;padding:4px 4px 10px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .collage::-webkit-scrollbar{display:none;}
+  .collage .ph{
+    position:static;flex:0 0 78%;scroll-snap-align:center;
+    width:auto;height:100%;margin:0;transform:none;
+  }
+  .founder-dots{margin-top:16px;}
 }
 
 /* TESTIMONIALS placeholder */
@@ -302,4 +313,17 @@ footer .footlinks{margin-top:10px;display:flex;gap:16px;justify-content:center;f
   nav.sitenav{padding:12px 16px;margin:10px auto 0;}
   header.hero{padding-top:120px;padding-bottom:70px;}
   section{padding:56px 18px;}
+}
+
+/* WOOD-GRAIN BACKGROUNDS ON MOBILE — the linework sits near the left/right edges of the
+   source image (by design, so it stays out of the way of centered text on desktop). On a
+   narrow phone screen, background-size:cover zooms in so much that a centered crop lands
+   right on the empty middle of the image, so the texture appears to vanish. Shifting the
+   crop toward one edge on mobile brings it back into view. Placed at the very end of the
+   file so it wins the cascade over the earlier unconditional background rules. */
+@media (max-width:760px){
+  header.hero{background-position: center, 10% center;}
+  .founder-quote{background-position: center, 90% center;}
+  #features{background-position: 10% center;}
+  #join{background-position: 90% center;}
 }

@@ -38,24 +38,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Features slider (mobile) — dot pagination follows the swipe position
-  var featuresGrid = document.getElementById('featuresGrid');
-  var featuresDots = document.querySelectorAll('#featuresDots .dot');
-  if (featuresGrid && featuresDots.length) {
+  // Swipeable card sliders (mobile) — dot pagination follows the swipe position.
+  // Reused for both the Features cards and the founder photo collage.
+  function setupSlider(containerEl, itemSelector, dotsEl) {
+    if (!containerEl || !dotsEl) return;
+    var dots = dotsEl.querySelectorAll('.dot');
+    if (!dots.length) return;
     var syncDots = function () {
-      var cards = featuresGrid.querySelectorAll('.feature-card');
-      var center = featuresGrid.scrollLeft + featuresGrid.clientWidth / 2;
+      var items = containerEl.querySelectorAll(itemSelector);
+      var center = containerEl.scrollLeft + containerEl.clientWidth / 2;
       var closest = 0, closestDist = Infinity;
-      cards.forEach(function (card, i) {
-        var cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        var dist = Math.abs(cardCenter - center);
+      items.forEach(function (item, i) {
+        var itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        var dist = Math.abs(itemCenter - center);
         if (dist < closestDist) { closestDist = dist; closest = i; }
       });
-      featuresDots.forEach(function (d, i) { d.classList.toggle('active', i === closest); });
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === closest); });
     };
-    featuresGrid.addEventListener('scroll', syncDots, { passive: true });
+    containerEl.addEventListener('scroll', syncDots, { passive: true });
     syncDots();
   }
+  setupSlider(document.getElementById('featuresGrid'), '.feature-card', document.getElementById('featuresDots'));
+  setupSlider(document.getElementById('founderCollage'), '.ph', document.getElementById('founderDots'));
 
   // Active-section highlighting in the nav as you scroll through the one-page layout
   var navLinks = document.querySelectorAll('.navlinks a.page');
