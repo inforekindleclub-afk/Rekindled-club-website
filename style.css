@@ -22,16 +22,24 @@ body{
 a{color:inherit;}
 section{scroll-margin-top:88px;}
 
-/* NAV — dark floating pill, always high-contrast regardless of section behind it */
+/* NAV — dark floating pill, always high-contrast regardless of section behind it.
+   The blurred background lives on a ::before pseudo-element rather than directly on
+   nav.sitenav — backdrop-filter (like filter) makes an element a containing block for
+   position:fixed descendants, which would trap the mobile full-screen menu overlay
+   inside this small pill instead of letting it cover the whole viewport. */
 nav.sitenav{
   position:sticky;top:16px;z-index:50;
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 20px 14px 22px;max-width:1100px;margin:16px auto 0;
-  background:rgba(28,22,17,0.92);
-  backdrop-filter:blur(8px);
   border-radius:999px;
   box-shadow:0 10px 30px rgba(28,22,17,0.25);
   transition:padding .3s ease, box-shadow .3s ease;
+}
+nav.sitenav::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:rgba(28,22,17,0.92);
+  backdrop-filter:blur(8px);
+  border-radius:inherit;
 }
 nav.sitenav.scrolled{padding:10px 20px 10px 22px;box-shadow:0 14px 34px rgba(28,22,17,0.32);}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:0.01em;color:var(--ivory);text-decoration:none;font-size:16px;}
@@ -47,9 +55,32 @@ nav.sitenav.scrolled{padding:10px 20px 10px 22px;box-shadow:0 14px 34px rgba(28,
   transition:transform .2s ease, box-shadow .2s ease;display:inline-block;
 }
 .navlinks a.follow:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(168,87,50,0.4);}
+
+/* HAMBURGER — hidden on desktop, shown on mobile; opens a full-screen nav overlay */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;align-items:center;justify-content:center;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ivory);border-radius:2px;}
+.nav-close{display:none;}
+
 @media (max-width:760px){
-  .navlinks{gap:12px;}
-  .navlinks a.page{display:none;}
+  .hamburger{display:flex;}
+  .navlinks{
+    position:fixed;inset:0;background:var(--umber);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+    opacity:0;visibility:hidden;transform:translateY(-14px);
+    transition:opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+    z-index:200;
+  }
+  .navlinks.open{
+    opacity:1;visibility:visible;transform:translateY(0);
+    transition:opacity .25s ease, transform .25s ease, visibility 0s;
+  }
+  .navlinks a.page{display:block;font-size:22px;font-weight:700;color:var(--ivory);opacity:0.92;}
+  .navlinks a.page:hover{opacity:1;}
+  .navlinks a.follow{margin-top:8px;}
+  .nav-close{
+    display:block;position:absolute;top:22px;right:24px;background:none;border:none;
+    color:var(--ivory);font-size:34px;line-height:1;cursor:pointer;padding:6px;
+  }
 }
 
 /* FLAME ICON */
@@ -133,11 +164,31 @@ p.lede{font-size:17px;color:var(--forest);opacity:0.78;text-align:center;max-wid
   transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 .feature-card:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(54,47,28,0.1);border-color:var(--rust);}
+.feature-card .ficon{
+  width:44px;height:44px;border-radius:12px;background:var(--ivory);color:var(--rust);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.feature-card .ficon svg{width:22px;height:22px;}
 .feature-card .num{font-size:12px;color:var(--olive);font-weight:800;letter-spacing:0.08em;margin-bottom:12px;}
 .feature-card h3{margin:0 0 8px;font-family:'Inter',sans-serif;font-weight:800;font-size:19px;color:var(--maroon);}
 .feature-card p{margin:0 0 14px;font-size:14.5px;color:var(--forest);opacity:0.75;}
 .feature-tags{display:flex;flex-wrap:wrap;gap:6px;}
 .feature-tags span{font-size:11px;font-weight:700;background:var(--ivory);color:var(--maroon);padding:5px 10px;border-radius:999px;border:1px solid rgba(87,40,38,0.15);}
+
+/* MOBILE — Features becomes a swipeable card slider with dot pagination, like the reference */
+.slider-dots{display:none;justify-content:center;gap:8px;margin-top:20px;}
+.slider-dots .dot{width:7px;height:7px;border-radius:50%;background:var(--ivory-musing);transition:background .2s ease, transform .2s ease;}
+.slider-dots .dot.active{background:var(--rust);transform:scale(1.35);}
+@media (max-width:700px){
+  .features-grid{
+    display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;
+    gap:16px;margin-top:32px;padding:4px 4px 10px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .features-grid::-webkit-scrollbar{display:none;}
+  .feature-card{flex:0 0 82%;scroll-snap-align:center;}
+  .slider-dots{display:flex;}
+}
 
 /* UPCOMING / EVENTS */
 .upcoming{background:var(--ivory-musing);}
@@ -185,7 +236,12 @@ p.lede{font-size:17px;color:var(--forest);opacity:0.78;text-align:center;max-wid
 .founder-copy h3{font-size:12px;text-transform:uppercase;letter-spacing:0.14em;color:var(--rust);font-weight:800;margin-bottom:12px;}
 .founder-copy h2{font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(26px,4vw,34px);margin-bottom:16px;}
 .founder-copy p{font-size:16px;color:var(--forest);opacity:0.82;margin-bottom:14px;}
-@media (max-width:760px){.founder-wrap{grid-template-columns:1fr;} .collage{height:320px;margin:0 auto;max-width:340px;}}
+@media (max-width:760px){
+  .founder-wrap{grid-template-columns:1fr;}
+  .collage{height:auto;margin:0 auto;max-width:320px;}
+  .collage .ph{position:static;width:100%;height:220px;margin:0 auto 16px;transform:none;}
+  .collage .ph-main{height:260px;}
+}
 
 /* TESTIMONIALS placeholder */
 .testimonial-soon{

@@ -16,6 +16,47 @@ document.addEventListener('DOMContentLoaded', function () {
     onScroll();
   }
 
+  // Mobile hamburger nav — opens a full-screen overlay with the nav links
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var navCloseBtn = document.getElementById('navCloseBtn');
+  var navLinksEl = document.getElementById('navLinks');
+  function openMobileNav() {
+    navLinksEl.classList.add('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    navLinksEl.classList.remove('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  if (hamburgerBtn && navLinksEl) {
+    hamburgerBtn.addEventListener('click', openMobileNav);
+    if (navCloseBtn) navCloseBtn.addEventListener('click', closeMobileNav);
+    navLinksEl.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMobileNav);
+    });
+  }
+
+  // Features slider (mobile) — dot pagination follows the swipe position
+  var featuresGrid = document.getElementById('featuresGrid');
+  var featuresDots = document.querySelectorAll('#featuresDots .dot');
+  if (featuresGrid && featuresDots.length) {
+    var syncDots = function () {
+      var cards = featuresGrid.querySelectorAll('.feature-card');
+      var center = featuresGrid.scrollLeft + featuresGrid.clientWidth / 2;
+      var closest = 0, closestDist = Infinity;
+      cards.forEach(function (card, i) {
+        var cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        var dist = Math.abs(cardCenter - center);
+        if (dist < closestDist) { closestDist = dist; closest = i; }
+      });
+      featuresDots.forEach(function (d, i) { d.classList.toggle('active', i === closest); });
+    };
+    featuresGrid.addEventListener('scroll', syncDots, { passive: true });
+    syncDots();
+  }
+
   // Active-section highlighting in the nav as you scroll through the one-page layout
   var navLinks = document.querySelectorAll('.navlinks a.page');
   var sections = [];
