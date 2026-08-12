@@ -225,27 +225,28 @@ fbq('track', 'PageView');
       APPLICATION FORM — wired to Brevo. Submissions land in the "Rekindled Club Applicants"
       list. The visual design here is entirely custom (your .leadform CSS) — only the field
       names/ids (FIRSTNAME, WHATSAPP, WHATSAPP__COUNTRY_CODE, EMAIL), the hidden anti-spam/
-      locale fields, the form action URL, and the two <script> blocks at the bottom of the
-      page came from Brevo's generated embed code. Do not rename those or Brevo won't
-      recognize the submitted fields.
+      locale fields, and the form action URL came from Brevo's generated embed code. Do not
+      rename those or Brevo won't recognize the submitted fields. The actual submit is
+      handled by submitJoinForm() in script.js (a direct fetch() to the action URL below) —
+      see the comment near the bottom of index.html for why.
     -->
-    <div id="success-message" class="sib-form-message-panel leadform-msg leadform-msg--success reveal">
-      <span class="sib-form-message-panel__inner-text">Hi {FIRSTNAME}, thank you for applying to Rekindled Club — we're so glad you're here. We'll be reaching out to you directly on WhatsApp with next steps.</span>
+    <div id="success-message" class="sib-form-message-panel leadform-msg leadform-msg--success">
+      <span class="sib-form-message-panel__inner-text">Thank you for applying to Rekindled Club — we're so glad you're here. We'll be reaching out to you directly on WhatsApp with next steps.</span>
     </div>
-    <div id="error-message" class="sib-form-message-panel leadform-msg leadform-msg--error reveal">
-      <span class="sib-form-message-panel__inner-text">Your application could not be sent. Please check your details and try again.</span>
+    <div id="error-message" class="sib-form-message-panel leadform-msg leadform-msg--error">
+      <span class="sib-form-message-panel__inner-text">Your application could not be sent. Please check your details and try again, or message us directly on WhatsApp.</span>
     </div>
 
-    <form id="sib-form" class="leadform reveal" method="POST" action="https://28890400.sibforms.com/serve/MUIFAEuKclr3uFVZT2wcnocZ58oiOmscN7-kKzUf5jNgbg2eJmpLDjcEboMmBtr4imjdC-7sCs-vMnrCW-QIsYytwBJiBZe45ScBic3zl3xrXvG0MoxtNAdkTCzOvVQQKpotNgCd8MEgwWPlNa0zIEubYQ2u6Wa5iK_m2fv_ZbpecCd7ZRhjHfBRG1dNNLVNFVhKXllhpxqBoaas6g==" data-type="subscription">
+    <form id="sib-form" class="leadform reveal" method="POST" action="https://28890400.sibforms.com/serve/MUIFAEuKclr3uFVZT2wcnocZ58oiOmscN7-kKzUf5jNgbg2eJmpLDjcEboMmBtr4imjdC-7sCs-vMnrCW-QIsYytwBJiBZe45ScBic3zl3xrXvG0MoxtNAdkTCzOvVQQKpotNgCd8MEgwWPlNa0zIEubYQ2u6Wa5iK_m2fv_ZbpecCd7ZRhjHfBRG1dNNLVNFVhKXllhpxqBoaas6g==">
       <label for="FIRSTNAME">Name</label>
-      <input class="input" type="text" id="FIRSTNAME" name="FIRSTNAME" maxlength="200" autocomplete="off" placeholder="Your name" data-required="true" required />
+      <input class="input" type="text" id="FIRSTNAME" name="FIRSTNAME" maxlength="200" autocomplete="off" placeholder="Your name" required />
 
       <label for="EMAIL">Email</label>
-      <input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="you@email.com" data-required="true" required />
+      <input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="you@email.com" required />
 
       <label for="WHATSAPP">WhatsApp number</label>
-      <div class="sib-sms-input whatsapp-row" data-placeholder="76543210" data-required="true" data-country-code="LK" data-value="" data-attributename="WHATSAPP">
-        <select class="input whatsapp-code" name="WHATSAPP__COUNTRY_CODE" data-required="true">
+      <div class="whatsapp-row">
+        <select class="input whatsapp-code" name="WHATSAPP__COUNTRY_CODE" aria-label="Country code">
           <option value="+94" selected>+94 LK</option>
           <option value="+91">+91 IN</option>
           <option value="+44">+44 GB</option>
@@ -254,10 +255,10 @@ fbq('track', 'PageView');
           <option value="+971">+971 AE</option>
           <option value="+65">+65 SG</option>
         </select>
-        <input class="input" type="tel" id="WHATSAPP" name="WHATSAPP" autocomplete="off" placeholder="76 543 2100" data-required="true" required />
+        <input class="input" type="tel" id="WHATSAPP" name="WHATSAPP" autocomplete="off" placeholder="76 543 2100" required />
       </div>
 
-      <input type="text" name="email_address_check" value="" class="input--hidden" />
+      <input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off" />
       <input type="hidden" name="locale" value="en" />
 
       <button type="submit" class="btn btn-primary">Submit application</button>
@@ -283,30 +284,12 @@ fbq('track', 'PageView');
   </div>
 </footer>
 
-<!-- Brevo form widget config + script — powers the WhatsApp country-code field and
-     submits the Join form via AJAX (so applicants stay on this page and see the
-     inline success/error message instead of being sent to a Brevo-hosted page). -->
-<script>
-  window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
-  window.LOCALE = 'en';
-  window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
-  window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank.";
-  window.GENERIC_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
-  window.INVALID_NUMBER = "The information provided is invalid. Please review the field format and try again.";
-  window.INVALID_DATE = "Please enter a valid date";
-  window.REQUIRED_MULTISELECT_MESSAGE = 'Please select at least 1 option';
-  window.translation = {
-    common: {
-      selectedList: '{quantity} list selected',
-      selectedLists: '{quantity} lists selected',
-      selectedOption: '{quantity} selected',
-      selectedOptions: '{quantity} selected',
-    }
-  };
-  var AUTOHIDE = Boolean(0);
-</script>
-<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-
+<!-- The Join form submits straight to Brevo's endpoint via our own fetch() call in
+     script.js (see submitJoinForm). Brevo's own "main.js" widget script was tried
+     first but throws an internal error on submit on this page (a bug on their end
+     unrelated to our markup) which silently blocked every submission — so we talk
+     to their endpoint directly instead, which is what their own script does under
+     the hood anyway. -->
 <script src="script.js"></script>
 </body>
 </html>

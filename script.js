@@ -61,6 +61,61 @@ document.addEventListener('DOMContentLoaded', function () {
   setupSlider(document.getElementById('featuresGrid'), '.feature-card', document.getElementById('featuresDots'));
   setupSlider(document.getElementById('founderCollage'), '.ph', document.getElementById('founderDots'));
 
+  // Join application form — submits straight to Brevo via fetch(), instead of relying on
+  // Brevo's own widget script (main.js). That script throws an internal error the moment
+  // this form is submitted (a bug on Brevo's end, confirmed by testing the exact same
+  // request without their script — it succeeds), which silently blocked every submission.
+  // This sends the same POST their script would have sent, then shows the matching message.
+  var joinForm = document.getElementById('sib-form');
+  if (joinForm) {
+    joinForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      submitJoinForm(joinForm);
+    });
+  }
+
+  function submitJoinForm(form) {
+    var successMsg = document.getElementById('success-message');
+    var errorMsg = document.getElementById('error-message');
+    var submitBtn = form.querySelector('button[type="submit"]');
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    if (successMsg) successMsg.classList.remove('is-visible');
+    if (errorMsg) errorMsg.classList.remove('is-visible');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+    }
+
+    var formData = new FormData(form);
+
+    fetch(form.action, { method: 'POST', body: formData, mode: 'cors' })
+      .then(function (response) {
+        if (response.ok) {
+          form.reset();
+          if (successMsg) {
+            successMsg.classList.add('is-visible');
+            successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        } else if (errorMsg) {
+          errorMsg.classList.add('is-visible');
+        }
+      })
+      .catch(function () {
+        if (errorMsg) errorMsg.classList.add('is-visible');
+      })
+      .finally(function () {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit application';
+        }
+      });
+  }
+
   // Active-section highlighting in the nav as you scroll through the one-page layout
   var navLinks = document.querySelectorAll('.navlinks a.page');
   var sections = [];

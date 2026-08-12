@@ -293,13 +293,14 @@ p.lede{font-size:17px;color:var(--forest);opacity:0.78;text-align:center;max-wid
 /* Brevo anti-spam honeypot field — must stay present but invisible to real visitors */
 .input--hidden{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 
-/* Brevo AJAX success/error messages — hidden by default via the same low-specificity
-   :where() trick Brevo's own embed code uses, so their form script can reveal whichever
-   one applies after a submit without fighting our stylesheet's specificity. */
-:where(.sib-form-message-panel){display:none;}
-.leadform-msg{max-width:460px;margin:0 auto 18px;padding:14px 18px;border-radius:12px;font-size:14px;line-height:1.5;text-align:left;}
+/* Join form success/error messages — hidden by default, shown by adding .is-visible
+   (toggled from submitJoinForm() in script.js once the real submit result is known). */
+.leadform-msg{display:none;max-width:460px;margin:0 auto 18px;padding:14px 18px;border-radius:12px;font-size:14px;line-height:1.5;text-align:left;}
+.leadform-msg.is-visible{display:block;}
 .leadform-msg--success{background:#e7faf0;color:#085229;border:1px solid #13ce66;}
 .leadform-msg--error{background:#ffeded;color:#661d1d;border:1px solid #ff4949;}
+
+.leadform button[disabled]{opacity:0.6;cursor:not-allowed;}
 
 .join-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
 .payment-note{max-width:460px;margin:18px auto 0;font-size:13px;color:var(--forest);opacity:0.7;text-align:center;}
