@@ -23,9 +23,11 @@ fbq('track', 'PageView');
 
 <nav class="sitenav">
   <a class="brand" href="#home">
-    <!-- LOGO placeholder: replace this svg+text with <img src="logo.png" alt="Rekindled Club" height="24"> once you have a real logo -->
-    <svg class="flame" width="19" height="19" viewBox="0 0 24 24" fill="#A85732" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.176 7.547 7.547 0 01-1.705-1.715.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"/>
+    <!-- LOGO: a simple circle-badge emblem for now. Swap this whole <svg> for
+         <img src="logo.png" alt="Rekindled Club" height="26"> once a real designed logo exists. -->
+    <svg class="logo-badge flame" width="30" height="30" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="17" cy="17" r="15" fill="none" stroke="#A85732" stroke-width="1.4" opacity="0.55"/>
+      <path transform="translate(9,8) scale(0.68)" fill="#A85732" fill-rule="evenodd" clip-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.176 7.547 7.547 0 01-1.705-1.715.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"/>
     </svg>
     Rekindled Club
   </a>
@@ -42,8 +44,9 @@ fbq('track', 'PageView');
 
 <!-- HOME -->
 <header class="hero" id="home">
-  <svg class="flame" width="44" height="44" viewBox="0 0 24 24" fill="#A85732" xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.176 7.547 7.547 0 01-1.705-1.715.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"/>
+  <svg class="logo-badge flame" width="58" height="58" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto 20px;display:block;">
+    <circle cx="17" cy="17" r="15" fill="none" stroke="#A85732" stroke-width="1.2" opacity="0.6"/>
+    <path transform="translate(9,8) scale(0.68)" fill="#A85732" fill-rule="evenodd" clip-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.176 7.547 7.547 0 01-1.705-1.715.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"/>
   </svg>
   <h1 class="title">Rekindled <span class="hl">Club</span></h1>
   <p class="tagline">Sri Lanka's first sister-led community for personal growth — for the girl who wants a different life, together, not alone.</p>
@@ -78,27 +81,32 @@ fbq('track', 'PageView');
 <section id="features">
   <div class="section-inner">
     <h2 class="eyebrow reveal">features</h2>
-    <h2 class="headline reveal">Everything lives inside one of these</h2>
+    <h2 class="headline reveal">Everything we serve, inside four pillars</h2>
+    <p class="lede reveal">Not four short topics — four full worlds. Here's exactly what's inside each one.</p>
     <div class="features-grid reveal-stagger">
       <div class="feature-card">
         <div class="num">01</div>
         <h3>Personality Development</h3>
-        <p>Reading, journaling, communication, confidence, habits — lean into whichever fits you. Nobody has to be "a reader" to belong.</p>
+        <p>Weekly reading circles and journaling prompts, real communication practice (not theory), confidence-building exercises, and habit systems built to actually stick — sent straight to the group, tailored to where you are right now.</p>
+        <div class="feature-tags"><span>Reading &amp; journaling</span><span>Communication practice</span><span>Habits &amp; confidence</span></div>
       </div>
       <div class="feature-card">
         <div class="num">02</div>
         <h3>Business &amp; Financial Guidance</h3>
-        <p>Idea validation, managing money, knowing your pros and cons before you start — real guidance, not theory.</p>
+        <p>Help validating your idea before you spend on it, budgeting and saving with intention, freelance and side-income strategy, and knowing your numbers — without needing a finance degree to understand any of it.</p>
+        <div class="feature-tags"><span>Idea validation</span><span>Money management</span><span>Income strategy</span></div>
       </div>
       <div class="feature-card">
         <div class="num">03</div>
         <h3>Wellbeing &amp; Self-Care</h3>
-        <p>Rest, boundaries, managing overwhelm — held gently, without needing to explain yourself.</p>
+        <p>Rest without guilt, setting boundaries with family and work, managing overwhelm and burnout before it hits, and building a self-care rhythm that actually fits your life — not an influencer's routine.</p>
+        <div class="feature-tags"><span>Boundaries &amp; rest</span><span>Managing overwhelm</span><span>Routines that fit you</span></div>
       </div>
       <div class="feature-card">
         <div class="num">04</div>
         <h3>Career &amp; Skills Growth</h3>
-        <p>For the woman building a career, not just a business — skills, confidence, and direction.</p>
+        <p>CV and interview support, public speaking and confidence at work, practical skill-building resources, and direction for the woman still figuring out what's next — for a career, not just a business.</p>
+        <div class="feature-tags"><span>Career clarity</span><span>Skill-building</span><span>Confidence at work</span></div>
       </div>
     </div>
   </div>

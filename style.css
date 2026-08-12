@@ -36,6 +36,8 @@ nav.sitenav{
 nav.sitenav.scrolled{padding:10px 20px 10px 22px;box-shadow:0 14px 34px rgba(28,22,17,0.32);}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:0.01em;color:var(--ivory);text-decoration:none;font-size:16px;}
 .brand svg{flex-shrink:0;}
+.logo-badge{flex-shrink:0;}
+.logo-badge circle{stroke:currentColor;}
 .navlinks{display:flex;align-items:center;gap:22px;}
 .navlinks a.page{font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ivory-musing);opacity:0.85;transition:opacity .2s ease,color .2s ease;}
 .navlinks a.page.active,.navlinks a.page:hover{opacity:1;color:var(--ivory);}
@@ -59,9 +61,13 @@ nav.sitenav.scrolled{padding:10px 20px 10px 22px;box-shadow:0 14px 34px rgba(28,
 }
 .flame{animation:flicker 3.2s ease-in-out infinite;transform-origin:center bottom;}
 
-/* HERO — dark, bold, high contrast like the reference */
+/* HERO — dark, bold, high contrast, with a warm glow over soft organic wood-grain linework */
 header.hero{
-  background:var(--umber);color:var(--ivory);
+  background:
+    radial-gradient(ellipse 900px 480px at 50% -8%, rgba(168,87,50,0.32), transparent 62%),
+    url('assets/bg-woodgrain-dark.svg') center/cover no-repeat,
+    var(--umber);
+  color:var(--ivory);
   text-align:center;padding:70px 28px 90px;margin-top:-72px;padding-top:142px;
   border-radius:0 0 32px 32px;
 }
@@ -117,7 +123,10 @@ p.lede{font-size:17px;color:var(--forest);opacity:0.78;text-align:center;max-wid
 .vm-card p{font-size:16px;color:var(--forest);opacity:0.85;}
 @media (max-width:700px){.vm-grid{grid-template-columns:1fr;}}
 
-/* FEATURES (was "pillars") */
+/* FEATURES (was "pillars") — soft organic wood-grain wash in the margins */
+#features{
+  background: url('assets/bg-woodgrain-light.svg') center/cover no-repeat, var(--ivory);
+}
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:36px;}
 .feature-card{
   background:var(--white);border:1px solid rgba(203,184,165,0.6);border-radius:18px;padding:30px 26px;text-align:left;
@@ -126,7 +135,9 @@ p.lede{font-size:17px;color:var(--forest);opacity:0.78;text-align:center;max-wid
 .feature-card:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(54,47,28,0.1);border-color:var(--rust);}
 .feature-card .num{font-size:12px;color:var(--olive);font-weight:800;letter-spacing:0.08em;margin-bottom:12px;}
 .feature-card h3{margin:0 0 8px;font-family:'Inter',sans-serif;font-weight:800;font-size:19px;color:var(--maroon);}
-.feature-card p{margin:0;font-size:14.5px;color:var(--forest);opacity:0.75;}
+.feature-card p{margin:0 0 14px;font-size:14.5px;color:var(--forest);opacity:0.75;}
+.feature-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.feature-tags span{font-size:11px;font-weight:700;background:var(--ivory);color:var(--maroon);padding:5px 10px;border-radius:999px;border:1px solid rgba(87,40,38,0.15);}
 
 /* UPCOMING / EVENTS */
 .upcoming{background:var(--ivory-musing);}
@@ -183,12 +194,21 @@ p.lede{font-size:17px;color:var(--forest);opacity:0.78;text-align:center;max-wid
 }
 
 /* FOUNDER QUOTE */
-.founder-quote{background:var(--umber);color:var(--ivory);}
+.founder-quote{
+  background:
+    radial-gradient(ellipse 700px 380px at 50% 110%, rgba(168,87,50,0.22), transparent 65%),
+    url('assets/bg-woodgrain-dark.svg') center/cover no-repeat,
+    var(--umber);
+  color:var(--ivory);
+}
 .founder-quote blockquote{font-style:italic;font-size:clamp(19px,3vw,25px);max-width:640px;margin:0 auto 22px;text-align:center;line-height:1.5;}
 .founder-quote .byline{text-align:center;font-size:13.5px;letter-spacing:0.04em;color:var(--ivory-musing);opacity:0.9;}
 .founder-quote .byline a{text-decoration:underline;color:var(--ivory);}
 
-/* JOIN / APPLICATION FORM */
+/* JOIN / APPLICATION FORM — soft organic wood-grain wash in the margins */
+#join{
+  background: url('assets/bg-woodgrain-light.svg') center/cover no-repeat, var(--ivory);
+}
 .leadform{max-width:460px;margin:40px auto 0;background:var(--white);border:1px solid rgba(203,184,165,0.6);border-radius:20px;padding:30px;}
 .leadform label{display:block;font-size:13px;font-weight:700;color:var(--maroon);margin:14px 0 6px;}
 .leadform label:first-child{margin-top:0;}
@@ -204,16 +224,23 @@ footer{padding:44px 28px;text-align:center;font-size:13px;color:var(--forest);op
 footer a{text-decoration:none;color:var(--maroon);font-weight:600;}
 footer .footlinks{margin-top:10px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 
-/* SCROLL REVEAL */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
-.reveal.visible{opacity:1;transform:none;}
-.feature-card, .step, .event-card{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
-.reveal-stagger.visible .feature-card:nth-child(1),.reveal-stagger.visible .event-card:nth-child(1){transition-delay:.05s;}
-.reveal-stagger.visible .feature-card:nth-child(2),.reveal-stagger.visible .event-card:nth-child(2){transition-delay:.15s;}
-.reveal-stagger.visible .feature-card:nth-child(3),.reveal-stagger.visible .event-card:nth-child(3){transition-delay:.25s;}
-.reveal-stagger.visible .feature-card:nth-child(4){transition-delay:.35s;}
-.reveal-stagger.visible .feature-card,
-.reveal-stagger.visible .event-card{opacity:1;transform:none;}
+/* SCROLL REVEAL — progressive enhancement: everything is visible by default.
+   script.js "arms" these elements (adds .reveal-armed) only once it has actually
+   loaded and run, THEN animates them in via IntersectionObserver. If script.js
+   ever fails to load, nothing gets armed, so the page stays fully visible and
+   static instead of breaking or hiding content. */
+.reveal, .reveal-stagger{opacity:1;transform:none;}
+.reveal.reveal-armed{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
+.reveal.reveal-armed.visible{opacity:1;transform:none;}
+
+.reveal-stagger .feature-card, .reveal-stagger .event-card{opacity:1;transform:none;}
+.reveal-stagger.reveal-armed .feature-card, .reveal-stagger.reveal-armed .event-card{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+.reveal-stagger.reveal-armed.visible .feature-card:nth-child(1),.reveal-stagger.reveal-armed.visible .event-card:nth-child(1){transition-delay:.05s;}
+.reveal-stagger.reveal-armed.visible .feature-card:nth-child(2),.reveal-stagger.reveal-armed.visible .event-card:nth-child(2){transition-delay:.15s;}
+.reveal-stagger.reveal-armed.visible .feature-card:nth-child(3),.reveal-stagger.reveal-armed.visible .event-card:nth-child(3){transition-delay:.25s;}
+.reveal-stagger.reveal-armed.visible .feature-card:nth-child(4){transition-delay:.35s;}
+.reveal-stagger.reveal-armed.visible .feature-card,
+.reveal-stagger.reveal-armed.visible .event-card{opacity:1;transform:none;}
 
 @media (max-width:520px){
   nav.sitenav{padding:12px 16px;margin:10px auto 0;}

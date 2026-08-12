@@ -43,9 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
     sections.forEach(function (s) { sectionObserver.observe(s.el); });
   }
 
-  // Scroll-reveal: fade + slide up as sections enter the viewport
+  // Scroll-reveal: fade + slide up as sections enter the viewport.
+  // Elements are only "armed" (hidden pre-animation) here, once we know this
+  // script actually ran — see the CSS comment above .reveal-armed for why.
   var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
   if ('IntersectionObserver' in window && revealEls.length) {
+    revealEls.forEach(function (el) { el.classList.add('reveal-armed'); });
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
