@@ -283,6 +283,24 @@ p.lede{font-size:17px;color:var(--forest);opacity:0.78;text-align:center;max-wid
 .leadform input:focus{outline:2px solid var(--rust);outline-offset:1px;}
 .leadform button{width:100%;margin-top:20px;}
 .leadform .note{font-size:12px;color:var(--forest);opacity:0.65;margin-top:12px;text-align:center;}
+
+/* WhatsApp field — country code + number side by side, styled to match the other inputs */
+.leadform select{width:100%;padding:11px 10px;border:1px solid var(--ivory-musing);border-radius:10px;font-size:14px;font-family:inherit;background:var(--ivory);color:var(--forest);}
+.whatsapp-row{display:flex;gap:8px;}
+.whatsapp-row .whatsapp-code{flex:0 0 96px;}
+.whatsapp-row input{flex:1;min-width:0;}
+
+/* Brevo anti-spam honeypot field — must stay present but invisible to real visitors */
+.input--hidden{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+
+/* Brevo AJAX success/error messages — hidden by default via the same low-specificity
+   :where() trick Brevo's own embed code uses, so their form script can reveal whichever
+   one applies after a submit without fighting our stylesheet's specificity. */
+:where(.sib-form-message-panel){display:none;}
+.leadform-msg{max-width:460px;margin:0 auto 18px;padding:14px 18px;border-radius:12px;font-size:14px;line-height:1.5;text-align:left;}
+.leadform-msg--success{background:#e7faf0;color:#085229;border:1px solid #13ce66;}
+.leadform-msg--error{background:#ffeded;color:#661d1d;border:1px solid #ff4949;}
+
 .join-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
 .payment-note{max-width:460px;margin:18px auto 0;font-size:13px;color:var(--forest);opacity:0.7;text-align:center;}
 

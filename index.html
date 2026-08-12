@@ -222,20 +222,43 @@ fbq('track', 'PageView');
     <p class="lede reveal">Fill in the application below. Once we've received it, we'll message you directly on WhatsApp with next steps — including how to secure your spot at The First Spark.</p>
 
     <!--
-      APPLICATION FORM — currently a placeholder that does nothing when submitted.
-      Once you have a Brevo account: go to Brevo > Contacts > Forms > create a "Simple form",
-      copy the embed HTML it gives you, and replace the <form>...</form> block below with it.
-      That will make submissions land directly in your Brevo mailing list, ready for newsletters.
+      APPLICATION FORM — wired to Brevo. Submissions land in the "Rekindled Club Applicants"
+      list. The visual design here is entirely custom (your .leadform CSS) — only the field
+      names/ids (FIRSTNAME, WHATSAPP, WHATSAPP__COUNTRY_CODE, EMAIL), the hidden anti-spam/
+      locale fields, the form action URL, and the two <script> blocks at the bottom of the
+      page came from Brevo's generated embed code. Do not rename those or Brevo won't
+      recognize the submitted fields.
     -->
-    <form class="leadform reveal" onsubmit="event.preventDefault(); alert('Form not yet connected — see the comment in index.html to wire this up to Brevo.');">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Your name" required />
+    <div id="success-message" class="sib-form-message-panel leadform-msg leadform-msg--success reveal">
+      <span class="sib-form-message-panel__inner-text">Hi {FIRSTNAME}, thank you for applying to Rekindled Club — we're so glad you're here. We'll be reaching out to you directly on WhatsApp with next steps.</span>
+    </div>
+    <div id="error-message" class="sib-form-message-panel leadform-msg leadform-msg--error reveal">
+      <span class="sib-form-message-panel__inner-text">Your application could not be sent. Please check your details and try again.</span>
+    </div>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="you@email.com" required />
+    <form id="sib-form" class="leadform reveal" method="POST" action="https://28890400.sibforms.com/serve/MUIFAEuKclr3uFVZT2wcnocZ58oiOmscN7-kKzUf5jNgbg2eJmpLDjcEboMmBtr4imjdC-7sCs-vMnrCW-QIsYytwBJiBZe45ScBic3zl3xrXvG0MoxtNAdkTCzOvVQQKpotNgCd8MEgwWPlNa0zIEubYQ2u6Wa5iK_m2fv_ZbpecCd7ZRhjHfBRG1dNNLVNFVhKXllhpxqBoaas6g==" data-type="subscription">
+      <label for="FIRSTNAME">Name</label>
+      <input class="input" type="text" id="FIRSTNAME" name="FIRSTNAME" maxlength="200" autocomplete="off" placeholder="Your name" data-required="true" required />
 
-      <label for="whatsapp">WhatsApp number</label>
-      <input type="tel" id="whatsapp" name="whatsapp" placeholder="07X XXX XXXX" required />
+      <label for="EMAIL">Email</label>
+      <input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="you@email.com" data-required="true" required />
+
+      <label for="WHATSAPP">WhatsApp number</label>
+      <div class="sib-sms-input whatsapp-row" data-placeholder="76543210" data-required="true" data-country-code="LK" data-value="" data-attributename="WHATSAPP">
+        <select class="input whatsapp-code" name="WHATSAPP__COUNTRY_CODE" data-required="true">
+          <option value="+94" selected>+94 LK</option>
+          <option value="+91">+91 IN</option>
+          <option value="+44">+44 GB</option>
+          <option value="+1">+1 US</option>
+          <option value="+61">+61 AU</option>
+          <option value="+971">+971 AE</option>
+          <option value="+65">+65 SG</option>
+        </select>
+        <input class="input" type="tel" id="WHATSAPP" name="WHATSAPP" autocomplete="off" placeholder="76 543 2100" data-required="true" required />
+      </div>
+
+      <input type="text" name="email_address_check" value="" class="input--hidden" />
+      <input type="hidden" name="locale" value="en" />
 
       <button type="submit" class="btn btn-primary">Submit application</button>
       <p class="note">No payment happens here. After you apply, we'll follow up on WhatsApp with everything else — including payment for The First Spark.</p>
@@ -259,6 +282,30 @@ fbq('track', 'PageView');
     <a href="mailto:info.rekindledclub@gmail.com">info.rekindledclub@gmail.com</a>
   </div>
 </footer>
+
+<!-- Brevo form widget config + script — powers the WhatsApp country-code field and
+     submits the Join form via AJAX (so applicants stay on this page and see the
+     inline success/error message instead of being sent to a Brevo-hosted page). -->
+<script>
+  window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
+  window.LOCALE = 'en';
+  window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+  window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank.";
+  window.GENERIC_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+  window.INVALID_NUMBER = "The information provided is invalid. Please review the field format and try again.";
+  window.INVALID_DATE = "Please enter a valid date";
+  window.REQUIRED_MULTISELECT_MESSAGE = 'Please select at least 1 option';
+  window.translation = {
+    common: {
+      selectedList: '{quantity} list selected',
+      selectedLists: '{quantity} lists selected',
+      selectedOption: '{quantity} selected',
+      selectedOptions: '{quantity} selected',
+    }
+  };
+  var AUTOHIDE = Boolean(0);
+</script>
+<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 
 <script src="script.js"></script>
 </body>
