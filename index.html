@@ -24,7 +24,7 @@ fbq('track', 'PageView');
 <nav class="sitenav">
   <a class="brand" href="index.html">
     <!-- LOGO placeholder: replace this svg+text with <img src="logo.png" alt="Rekindled Club" height="26"> once you have a real logo -->
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="#8A6D3A" xmlns="http://www.w3.org/2000/svg">
+    <svg class="flame" width="20" height="20" viewBox="0 0 24 24" fill="#572826" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.176 7.547 7.547 0 01-1.705-1.715.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"/>
     </svg>
     Rekindled Club
@@ -37,31 +37,32 @@ fbq('track', 'PageView');
   </div>
 </nav>
 
-<header class="pagehero">
-  <svg class="spark" width="44" height="44" viewBox="0 0 24 24" fill="#5C4423" xmlns="http://www.w3.org/2000/svg">
+<header class="hero">
+  <svg class="flame" width="46" height="46" viewBox="0 0 24 24" fill="#A85732" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.176 7.547 7.547 0 01-1.705-1.715.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"/>
   </svg>
-  <h1>Rekindled Club</h1>
-  <p class="tag">for the girl who wants a different life — together, not alone.</p>
+  <h1 class="title">Rekindled <span class="hl">Club</span></h1>
+  <p class="tagline">for the girl who wants a different life — together, not alone.</p>
   <div class="cta-row">
     <a class="btn btn-primary" href="join.html">Join the founding circle</a>
     <a class="btn btn-ghost" href="https://www.instagram.com/rekindled.club" target="_blank" rel="noopener">Follow @rekindled.club</a>
   </div>
+  <div class="divider"></div>
 </header>
 
-<section class="white-block">
+<section class="about reveal">
   <div class="section-inner">
     <h2 class="eyebrow">what this is</h2>
     <h2 class="headline">A community first. A club second.</h2>
-    <p class="lede">Rekindled Club is a curated, sister-led personal development community for women across Sri Lanka — built by <a href="about.html" style="color:var(--gold-deep);font-weight:600;">Zainab</a>. Not a course platform, not content to scroll past — an actual space, small enough that everyone in it is known.</p>
+    <p class="lede">Rekindled Club is a curated, sister-led personal development community for women across Sri Lanka — built by <a href="about.html" style="color:var(--maroon);font-weight:600;">Zainab</a>. Not a course platform, not content to scroll past — an actual space, small enough that everyone in it is known.</p>
   </div>
 </section>
 
 <section class="pillars">
   <div class="section-inner">
-    <h2 class="eyebrow">the four pillars</h2>
-    <h2 class="headline">Everything lives inside one of these</h2>
-    <div class="pillars-grid">
+    <h2 class="eyebrow reveal">the four pillars</h2>
+    <h2 class="headline reveal">Everything lives inside one of these</h2>
+    <div class="pillars-grid reveal-stagger">
       <div class="pillar-card">
         <div class="num">01</div>
         <h3>Personality Development</h3>
@@ -86,11 +87,11 @@ fbq('track', 'PageView');
   </div>
 </section>
 
-<section class="how white-block">
+<section class="how">
   <div class="section-inner">
-    <h2 class="eyebrow">how it starts</h2>
-    <h2 class="headline">Small, on purpose</h2>
-    <div class="steps">
+    <h2 class="eyebrow reveal">how it starts</h2>
+    <h2 class="headline reveal">Small, on purpose</h2>
+    <div class="steps reveal-stagger">
       <div class="step">
         <div class="stepnum">1</div>
         <div><h4>The First Spark</h4><p>A live welcome session — where you actually meet Zainab and hear what this is, before anything else.</p></div>
@@ -104,11 +105,11 @@ fbq('track', 'PageView');
         <div><h4>Together, weekly</h4><p>Online sessions every week, in-person meetups when we can, and a community that talks back — not just listens.</p></div>
       </div>
     </div>
-    <div class="cta-row"><a class="btn btn-primary" href="join.html">Join the founding circle</a></div>
+    <div class="cta-row reveal"><a class="btn btn-primary" href="join.html">Join the founding circle</a></div>
   </div>
 </section>
 
-<section class="founder">
+<section class="founder reveal">
   <div class="section-inner">
     <blockquote>"This is for the girl who desperately wants a different life — not because her life is bad, but because she knows there's more inside her than what's been decided for her."</blockquote>
     <p class="byline">— Zainab, Founder · <a href="https://www.instagram.com/documentwith.zaiinab" target="_blank" rel="noopener">@documentwith.zaiinab</a></p>
@@ -127,5 +128,6 @@ fbq('track', 'PageView');
   </div>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
