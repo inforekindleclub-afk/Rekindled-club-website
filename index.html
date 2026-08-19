@@ -6,6 +6,9 @@
 <title>Rekindled Club — for the girl who wants a different life</title>
 <meta name="description" content="Rekindled Club — Sri Lanka's first sister-led personal development club. Together, not alone." />
 <link rel="stylesheet" href="style.css" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 
 <!-- META PIXEL — uncomment once you have a Pixel ID from Meta Events Manager, and replace YOUR_PIXEL_ID
 <script>
@@ -23,12 +26,7 @@ fbq('track', 'PageView');
 
 <nav class="sitenav">
   <a class="brand" href="#home">
-    <!-- LOGO: a simple circle-badge emblem for now. Swap this whole <svg> for
-         <img src="logo.png" alt="Rekindled Club" height="26"> once a real designed logo exists. -->
-    <svg class="logo-badge flame" width="30" height="30" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="17" cy="17" r="15" fill="none" stroke="#A85732" stroke-width="1.4" opacity="0.55"/>
-      <path transform="translate(9,8) scale(0.68)" fill="#A85732" fill-rule="evenodd" clip-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.176 7.547 7.547 0 01-1.705-1.715.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"/>
-    </svg>
+    <img class="logo-badge" src="logo.png" alt="" height="30" />
     Rekindled Club
   </a>
   <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
@@ -48,10 +46,7 @@ fbq('track', 'PageView');
 
 <!-- HOME -->
 <header class="hero" id="home">
-  <svg class="logo-badge flame" width="58" height="58" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto 20px;display:block;">
-    <circle cx="17" cy="17" r="15" fill="none" stroke="#A85732" stroke-width="1.2" opacity="0.6"/>
-    <path transform="translate(9,8) scale(0.68)" fill="#A85732" fill-rule="evenodd" clip-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.176 7.547 7.547 0 01-1.705-1.715.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"/>
-  </svg>
+  <img class="logo-badge" src="logo.png" alt="Rekindled Club" height="90" style="margin:0 auto 20px;display:block;" />
   <h1 class="title">Rekindled <span class="hl">Club</span></h1>
   <p class="tagline">Sri Lanka's first sister-led community for personal growth — for the girl who wants a different life, together, not alone.</p>
   <div class="cta-row">
@@ -226,9 +221,11 @@ fbq('track', 'PageView');
       list. The visual design here is entirely custom (your .leadform CSS) — only the field
       names/ids (FIRSTNAME, WHATSAPP, WHATSAPP__COUNTRY_CODE, EMAIL), the hidden anti-spam/
       locale fields, and the form action URL came from Brevo's generated embed code. Do not
-      rename those or Brevo won't recognize the submitted fields. The actual submit is
-      handled by submitJoinForm() in script.js (a direct fetch() to the action URL below) —
-      see the comment near the bottom of index.html for why.
+      rename those or Brevo won't recognize the submitted fields — confirmed directly against
+      Brevo's endpoint that "WHATSAPP" is this form's real, required attribute name (renaming
+      it to "SMS" gets rejected outright). If the number isn't visible on a contact's
+      Information card in the dashboard, it's a display/column setting, not a data problem —
+      see the note added in the chat about using "Customize columns" or search to find it.
     -->
     <div id="success-message" class="sib-form-message-panel leadform-msg leadform-msg--success">
       <span class="sib-form-message-panel__inner-text">Thank you for applying to Rekindled Club — we're so glad you're here. We'll be reaching out to you directly on WhatsApp with next steps.</span>
