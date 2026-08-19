@@ -46,8 +46,8 @@ nav.sitenav.scrolled{padding:10px 20px 10px 22px;box-shadow:0 14px 34px rgba(28,
 .brand svg{flex-shrink:0;}
 .logo-badge{flex-shrink:0;}
 .logo-badge circle{stroke:currentColor;}
-.logo-badge-wrap{flex-shrink:0;width:48px;height:48px;border-radius:50%;background:var(--ivory);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
-.logo-badge-wrap .logo-badge{height:32px;width:auto;}
+.logo-badge-wrap{flex-shrink:0;width:60px;height:60px;border-radius:50%;background:var(--ivory);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
+.logo-badge-wrap .logo-badge{height:46px;width:auto;display:block;}
 .navlinks{display:flex;align-items:center;gap:22px;}
 .navlinks a.page{font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ivory-musing);opacity:0.85;transition:opacity .2s ease,color .2s ease;}
 .navlinks a.page.active,.navlinks a.page:hover{opacity:1;color:var(--ivory);}
@@ -340,8 +340,8 @@ footer .footlinks{margin-top:24px;display:flex;gap:20px;justify-content:center;f
 @media (max-width:520px){
   nav.sitenav{padding:10px 14px;margin:10px auto 0;}
   .brand{font-size:14px;gap:8px;}
-  .logo-badge-wrap{width:38px;height:38px;}
-  .logo-badge-wrap .logo-badge{height:24px;}
+  .logo-badge-wrap{width:50px;height:50px;}
+  .logo-badge-wrap .logo-badge{height:38px;}
   header.hero{padding-top:120px;padding-bottom:70px;}
   section{padding:56px 18px;}
 }
